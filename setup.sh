@@ -2,8 +2,19 @@
 
 # Add apt Repositories
 sudo add-apt-repository ppa:flatpak/stable
+sudo curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
+sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
+sudo echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" |
+sudo tee /etc/apt/sources.list.d/1password.list
+sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/
+sudo curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | \
+sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
+sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
+sudo curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
+sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
 sudo apt update
 sudo apt full-upgrade
+
 sudo apt install git zsh rsync flatpak curl fzf snap ntfs-3g gnome-terminal gnome-software-plugin-flatpak \
     uidmap android-sdk-platform-tools gnome-commander gnome-shell-extensions gnome-shell-extension-manager apper -y
 
@@ -23,7 +34,11 @@ wget -qO- https://raw.githubusercontent.com/Botspot/pi-apps/master/install | bas
 ~/pi-apps/manage install "Oh my Posh"
 ~/pi-apps/manage install "Timeshift"
 
-## Install Docker
+# rpi-update https://github.com/Hexxeh/rpi-update
+
+sudo curl -L --output /usr/bin/rpi-update https://raw.githubusercontent.com/Hexxeh/rpi-update/master/rpi-update && sudo chmod +x /usr/bin/rpi-update
+
+# Install Docker
 
 curl -sSL https://get.docker.com | sh
 sudo usermod -aG docker $USER
@@ -50,6 +65,10 @@ curl -sSO https://downloads.1password.com/linux/tar/stable/aarch64/1password-lat
 sudo tar -xf 1password-latest.tar.gz && sudo mkdir -p /opt/1Password
 sudo mv 1password-*/* /opt/1Password
 Sudo /opt/1Password/after-install.sh
+
+# 1password-cli (op)
+
+sudo apt install 1password-cli
 
 # Install SDK Man
 curl -s "https://get.sdkman.io" | bash
