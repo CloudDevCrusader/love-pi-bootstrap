@@ -16,7 +16,11 @@ sudo apt update
 sudo apt full-upgrade
 
 sudo apt install git zsh rsync flatpak curl build-essential fzf snap ntfs-3g gnome-terminal gnome-software-plugin-flatpak \
-    uidmap android-sdk-platform-tools gnome-commander gnome-shell-extensions gnome-shell-extension-manager -y
+    uidmap android-sdk-platform-tools gnome-commander gnome-shell-extensions gnome-shell-extension-manager coreutils quilt \
+    parted qemu-user-static debootstrap zerofree zip \
+    dosfstools libarchive-tools libcap2-bin grep rsync xz-utils \
+    file git git-lfs curl bc \
+    gpg pigz xxd arch-test bmap-tools -y
 
 # Install Ohmyzsh
 
