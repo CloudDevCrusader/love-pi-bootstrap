@@ -13,14 +13,15 @@ sudo add-apt-repository ppa:flatpak/stable
 # sudo curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
 # sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
 sudo apt update
-sudo apt full-upgrade
+sudo apt dist-upgrade
 
-sudo apt install git zsh rsync flatpak curl build-essential fzf snap ntfs-3g gnome-terminal gnome-software-plugin-flatpak \
+sudo apt install git git-lfs zsh zsh-synthax-highlighting zsh-autocomplete rclone rsync flatpak curl build-essential neofetch \
+    fzf snap ntfs-3g gnome-terminal gnome-software-plugin-flatpak \
     uidmap android-sdk-platform-tools gnome-commander gnome-shell-extensions gnome-shell-extension-manager coreutils quilt \
     parted qemu-user-static debootstrap zerofree zip \
-    dosfstools libarchive-tools libcap2-bin grep rsync xz-utils \
+    dosfstools libarchive-tools libcap2-bin grep xz-utils \
     file git git-lfs curl bc \
-    gpg pigz xxd arch-test bmap-tools -y
+    gpg pigz xxd arch-test bmap-tools lightdm -y
 
 # Install Ohmyzsh
 
