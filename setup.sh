@@ -2,26 +2,37 @@
 
 # Add apt Repositories
 sudo add-apt-repository ppa:flatpak/stable
-sudo curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
-sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
-sudo echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" |
-sudo tee /etc/apt/sources.list.d/1password.list
-sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/
-sudo curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | \
-sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
-sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
-sudo curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
-sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
+# sudo curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
+# sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
+# sudo echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" |
+# sudo tee /etc/apt/sources.list.d/1password.list
+# sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/
+# sudo curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | \
+# sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
+# sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
+# sudo curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
+# sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
 sudo apt update
 sudo apt full-upgrade
 
-sudo apt install git zsh rsync flatpak curl fzf snap ntfs-3g gnome-terminal gnome-software-plugin-flatpak \
-    uidmap android-sdk-platform-tools gnome-commander gnome-shell-extensions gnome-shell-extension-manager apper -y
+sudo apt install git zsh rsync flatpak curl build-essential fzf snap ntfs-3g gnome-terminal gnome-software-plugin-flatpak \
+    uidmap android-sdk-platform-tools gnome-commander gnome-shell-extensions gnome-shell-extension-manager -y
 
 # Install Ohmyzsh
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+# Install Brew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+echo >> /home/cloudcrusader/.zshrc
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/cloudcrusader/.zshrc
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+brew install gcc
+brew install nvm
+nvm install --lts
+nvm use lts
 # Install Pi-Apps
 
 wget -qO- https://raw.githubusercontent.com/Botspot/pi-apps/master/install | bash
@@ -59,16 +70,8 @@ curl -L https://coder.com/install.sh | sh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 omz plugin enable nvm zsh-interactive-cd zsh-navigation-tools docker pip python ubuntu rsync history ssh sudo urltool
-# Install 1password
-
-curl -sSO https://downloads.1password.com/linux/tar/stable/aarch64/1password-latest.tar.gz
-sudo tar -xf 1password-latest.tar.gz && sudo mkdir -p /opt/1Password
-sudo mv 1password-*/* /opt/1Password
-Sudo /opt/1Password/after-install.sh
-
-# 1password-cli (op)
-
-sudo apt install 1password-cli
+# Install Bitwarden
+flatpak install flathub com.bitwarden.desktop
 
 # Install SDK Man
 curl -s "https://get.sdkman.io" | bash
@@ -82,9 +85,9 @@ chmod a+x ./scripts/jdownloader2.installer.sh
 sh ./scripts/jdownloader2.installer.sh
 
 # Install NVM
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+# export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 nvm install --lts
 
