@@ -13,4 +13,4 @@ services:
       - /:/raspi-root/
       - /media/cloudcrusader/PortableSSD:/mnt/PortableSSD/
       - /media/cloudcrusader/ExtremeSSD:/mnt/ExtremeSSD/
-      - "/mnt/PortableSSD/Google Drive/" : "/music:ro"
+      - /mnt/PortableSSD/Google Drive/: "/music:ro"
