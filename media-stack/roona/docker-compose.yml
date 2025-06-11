@@ -1,0 +1,29 @@
+
+# [Roon Server](https://roon.app/de/downloads)  
+# Original Project / Tutorial: https://thijstakken.github.io/MusicService/docker-compose.yml
+# Self-Hosted with <3. Currently it runs on Raspberry Pi 5 /w Raspbian + Docker
+# Built to run on nearly all devices, with native Apps
+# Desktops: [Win](https://download.roonlabs.net/builds/RoonInstaller64.exe), [OSX](https://download.roonlabs.net/builds/Roon.dmg)
+# Mobile-Remote: [Android](https://play.google.com/store/apps/details?id=com.roon.mobile) and [iOS](https://play.google.com/store/apps/details?id=com.roon.mobile)
+# Mobile-Offline-Player : [Android](https://play.google.com/store/apps/details?id=com.roon.mobile) and [iOS](https://play.google.com/store/apps/details?id=com.roon.mobile) [iOS](https://apps.apple.com/app/roon-arc/id1555549544)
+
+version: "3.7"
+services:
+  docker-roonserver:
+    image: steefdebruijn/docker-roonserver:latest
+    container_name: docker-roonserver
+    hostname: docker-roonserver
+    network_mode: host
+    environment:
+      TZ: "Europe/Berlin"
+    volumes:
+      - roon-app:/app
+      - roon-data:/data
+      - roon-music:/music
+      - roon-backups:/backup
+    restart: always
+volumes:
+  roon-app:
+  roon-data:
+  roon-music:
+  roon-backups:
