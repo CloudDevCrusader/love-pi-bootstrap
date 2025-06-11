@@ -13,5 +13,6 @@ services:
       - TZ=Europe/Berlin
     volumes:
       - /home/cloudcrusader/mediastack/autobrr/config:/config
+      - /:/raspi-root/
     ports:
       - 7474:7474
